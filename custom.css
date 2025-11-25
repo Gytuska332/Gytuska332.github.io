@@ -220,3 +220,164 @@ a:focus { outline: 3px solid rgb(30, 129, 228); outline-offset: 3px; }
 }
 
 /* End of added styles */
+
+/* =====================
+	 Animations & Preloader
+	 - Fade-in section
+	 - Social icon gentle movement
+	 - Decorative page preloader (CSS-only)
+	 - Reduced-motion handling
+	 ===================== */
+
+/* Fade-in for sections / blocks */
+.fade-in, .section.fade-in {
+	opacity: 0;
+	transform: translateY(10px) scale(0.995);
+	animation: fadeInSection 700ms cubic-bezier(.2,.9,.25,1) forwards;
+	will-change: transform, opacity;
+}
+
+@keyframes fadeInSection {
+	0% { opacity: 0; transform: translateY(10px) scale(0.995); }
+	60% { opacity: 1; transform: translateY(-3px) scale(1.002); }
+	100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Stagger helper for lists/children */
+.fade-in[data-stagger] > * { opacity: 0; transform: translateY(8px); animation: fadeInSection 700ms cubic-bezier(.2,.9,.25,1) forwards; }
+.fade-in[data-stagger] > *:nth-child(1){ animation-delay: 0.08s }
+.fade-in[data-stagger] > *:nth-child(2){ animation-delay: 0.16s }
+.fade-in[data-stagger] > *:nth-child(3){ animation-delay: 0.24s }
+.fade-in[data-stagger] > *:nth-child(4){ animation-delay: 0.32s }
+.fade-in[data-stagger] > *:nth-child(5){ animation-delay: 0.40s }
+
+/* Social icon subtle float / bounce for attention (apply to .social-icon) */
+.social-icon { display: inline-block; transform-origin: center; }
+.social-icon.float { animation: socialFloat 2200ms ease-in-out infinite; }
+
+@keyframes socialFloat {
+	0%   { transform: translateY(0) scale(1); }
+	25%  { transform: translateY(-4px) scale(1.02); }
+	50%  { transform: translateY(0) scale(1); }
+	75%  { transform: translateY(2px) scale(0.995); }
+	100% { transform: translateY(0) scale(1); }
+}
+
+/* Decorative page preloader - CSS only (non-blocking decorative element)
+	 Place the markup near the top of body. It is aria-hidden and non-interactive.
+	 It is intentionally decorative so it won't interfere with keyboard users. */
+.page-preloader.decorative { position: fixed; right: 22px; bottom: 22px; z-index: 9999; pointer-events: none; }
+.page-preloader .spinner, .page-preloader .pulsing-dots { display: inline-flex; align-items: center; justify-content: center; }
+
+/* Square spinner with 4 animated lines */
+.page-preloader .spinner {
+	width: 150px;
+	height: 50px;
+	position: fixed;
+	left: 19%;
+	top: 5%;
+	transform: translate(-50%, -50%);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.page-preloader .spinner::before,
+.page-preloader .spinner::after {
+	content: '';
+	position: absolute;
+	background: var(--accent);
+}
+
+/* Top line */
+.page-preloader .spinner::before {
+	width: 150px;
+	height: 4px;
+	top: 0;
+	animation: lineTop 1.2s ease-in-out infinite;
+}
+
+/* Right line */
+.page-preloader .spinner::after {
+	width: 4px;
+	height: 150px;
+	right: 0;
+	animation: lineRight 1.2s ease-in-out infinite 0.5s;
+}
+
+/* Bottom line (using child div via adjacent pseudo) */
+.page-preloader .spinner {
+	--line-color: var(--accent);
+}
+
+.page-preloader .spinner > * {
+	position: absolute;
+	background: var(--accent);
+}
+
+.page-preloader .spinner > *:nth-child(1) {
+	width: 50px;
+	height: 4px;
+	bottom: 0;
+	animation: lineBottom 1.2s ease-in-out infinite 2.5s;
+}
+
+.page-preloader .spinner > *:nth-child(2) {
+	width: 4px;
+	height: 50px;
+	left: 0;
+	animation: lineLeft 1.2s ease-in-out infinite 3s;
+}
+
+@keyframes lineTop {
+	0% { width: 0; left: 0; }
+	50% { width: 150px; left: 0; }
+	100% { width: 0; left: 150px; }
+}
+
+@keyframes lineRight {
+	0% { height: 0; top: 0; }
+	50% { height: 50px; top: 0; }
+	100% { height: 0; top: 50px; }
+}
+
+@keyframes lineBottom {
+	0% { width: 0; right: 0; }
+	50% { width: 150px; right: 0; }
+	100% { width: 0; right: 150px; }
+}
+
+@keyframes lineLeft {
+	0% { height: 0; bottom: 0; }
+	50% { height: 50px; bottom: 0; }
+	100% { height: 0; bottom: 50px; }
+}
+
+/* Pulsing dots variation */
+.page-preloader .pulsing-dots { gap: .5rem; }
+.page-preloader .pulsing-dots .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); opacity: .9; transform-origin: center; animation: pulseDot 1.3s cubic-bezier(.2,.9,.25,1) infinite; }
+.page-preloader .pulsing-dots .dot:nth-child(2) { animation-delay: 0.16s }
+.page-preloader .pulsing-dots .dot:nth-child(3) { animation-delay: 0.32s }
+@keyframes pulseDot { 0%{ transform: scale(.85); opacity:.45 } 50%{ transform: scale(1.35); opacity:1 } 100%{ transform: scale(.85); opacity:.45 } }
+
+/* Simple accessible size reduction on very small screens */
+@media (max-width:480px){ .page-preloader .spinner{ width:36px; height:36px; border-width:3px } .page-preloader{ right: 12px; bottom: 12px } }
+
+/* =====================
+	 Reduced-motion accessibility
+	 - Turn off or simplify animations for users who prefer reduced motion
+	 ===================== */
+@media (prefers-reduced-motion: reduce) {
+	.fade-in, .fade-in[data-stagger] > *, .social-icon.float, .page-preloader .spinner, .page-preloader .pulsing-dots .dot {
+		animation: none !important;
+		transition: none !important;
+		transform: none !important;
+		opacity: 1 !important;
+	}
+	.page-preloader .spinner { border-top-color: var(--accent); transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+	.page-preloader.decorative {
+		display: none !important;
+	}
+}
