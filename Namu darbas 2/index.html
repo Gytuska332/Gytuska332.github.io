@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intersection - Traffic Light Demo</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrap">
+        <h1>Simple Intersection</h1>
+
+        <div class="intersection" aria-label="Four-way intersection">
+                <!-- road surfaces (vertical + horizontal) -->
+                <div class="street vertical" aria-hidden="true">
+                    <div class="center-line"></div>
+                </div>
+                <div class="street horizontal" aria-hidden="true">
+                    <div class="center-line"></div>
+                </div>
+                <!-- black center intersection -->
+                <div class="street-center" aria-hidden="true"></div>
+            <!-- North road -->
+            <div class="road north">
+                <div id="light-north" class="traffic-light" aria-hidden="false">
+                    <div class="bulb red" aria-hidden="true"></div>
+                    <div class="bulb yellow" aria-hidden="true"></div>
+                    <div class="bulb green" aria-hidden="true"></div>
+                </div>
+            </div>
+
+            <!-- South road -->
+            <div class="road south">
+                <div id="light-south" class="traffic-light">
+                    <div class="bulb red"></div>
+                    <div class="bulb yellow"></div>
+                    <div class="bulb green"></div>
+                </div>
+            </div>
+
+            <!-- East road -->
+            <div class="road east">
+                <div id="light-east" class="traffic-light">
+                    <div class="bulb red"></div>
+                    <div class="bulb yellow"></div>
+                    <div class="bulb green"></div>
+                </div>
+            </div>
+
+            <!-- West road -->
+            <div class="road west">
+                <div id="light-west" class="traffic-light">
+                    <div class="bulb red"></div>
+                    <div class="bulb yellow"></div>
+                    <div class="bulb green"></div>
+                </div>
+            </div>
+
+            <!-- Pedestrian button/status -->
+                    <div class="pedestrian">
+                <button id="ped-button" class="ped-btn">Press</button>
+                <div id="ped-status" class="ped-status">No request</div>
+            </div>
+
+                    <!-- zebra crossing (bottom center) -->
+                    <div class="crosswalk bottom-crossing" aria-hidden="true"></div>
+        </div>
+
+        <div class="controls">
+            <div class="controls-row">
+                <button id="start-btn">Start</button>
+                <button id="stop-btn" disabled>Stop</button>
+                <button id="next-btn">Next</button>
+                <div class="status" style="margin-left:12px">Phase: <strong id="phase-label">ALL_RED</strong></div>
+            </div>
+
+            <div class="legend">
+                <span class="pill red"></span> Red
+                <span class="pill yellow" style="margin-left:8px"></span> Yellow
+                <span class="pill green" style="margin-left:8px"></span> Green
+            </div>
+
+            <div class="notes">
+                Click Start to run the light cycle. Use Pedestrian to request a walk phase.
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,78 @@
+/* Simple styles for traffic light controller demo */
+:root{
+  --bg:#f3f6f9;
+  --panel:#ffffff;
+  --muted:#6b7280;
+  --accent:#faca2de1;
+}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,Arial,sans-serif;background:var(--bg);margin:0;color:#0f1723}
+.wrap{max-width:1080px;margin:28px auto;padding:20px}
+h1{text-align:center;margin-bottom:18px}
+.intersection{position:relative;height:720px;background:linear-gradient(180deg,#dfe9f3, #f8fbff);border-radius:10px;padding:20px;display:flex;align-items:center;justify-content:center}
+.road{position:absolute;width:120px;height:180px;display:flex;align-items:center;justify-content:center}
+.road.north{top:17%;left:40%;transform:translateX(-50%)}
+.road.south{bottom:17%;left:60%;transform:translateX(-50%)}
+.road.east{right:30%;top:35%;transform:translateY(-50%)}
+.road.west{left:30%;top:65%;transform:translateY(-50%)}
+
+.traffic-light{width:56px;background:#222;border-radius:8px;padding:10px;display:flex;flex-direction:column;gap:8px;box-shadow:0 6px 18px rgba(15,23,35,0.15)}
+
+/* rotate the visible face of each traffic light (keep bulb order correct) */
+.road.north .traffic-light{transform:rotate(180deg);transform-origin:center}
+.road.south .traffic-light{transform:rotate(0deg);transform-origin:center}
+.road.east  .traffic-light{transform:rotate(-90deg);transform-origin:center}
+.road.west  .traffic-light{transform:rotate(90deg);transform-origin:center}
+.bulb{width:36px;height:36px;border-radius:50%;background:#2b2b2b;opacity:0.25;box-shadow:inset 0 -3px 6px rgba(0,0,0,.6)}
+.bulb.red.on{background:#ff4d4d;opacity:1;box-shadow:0 6px 20px rgba(255,77,77,0.3)}
+.bulb.yellow.on{background:#ffd24d;opacity:1;box-shadow:0 6px 20px rgba(255,210,77,0.22)}
+.bulb.green.on{background:#4dd27a;opacity:1;box-shadow:0 6px 20px rgba(77,210,122,0.18)}
+
+.controls{margin-top:18px;display:flex;flex-direction:column;gap:12px}
+.controls-row{display:flex;gap:8px;align-items:center}
+.controls button{padding:10px 12px;border-radius:8px;border:0;background:var(--panel);box-shadow:0 6px 18px rgba(15,23,35,.06);cursor:pointer}
+.controls button:disabled{opacity:.45;cursor:default}
+.status{margin-top:6px}
+.legend{display:flex;gap:10px;margin-top:8px}
+.pill{display:inline-block;width:12px;height:12px;border-radius:3px}
+.pill.red{background:#ff4d4d}
+.pill.yellow{background:#ffd24d}
+.pill.green{background:#4dd27a}
+
+.pedestrian{position:absolute;left:35%;bottom:170px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;z-index:6}
+.ped-btn{padding:10px 14px;border-radius:8px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+.ped-status{font-size:.95rem;color:var(--muted)}
+
+
+.notes{margin-top:16px;color:var(--muted);font-size:.95rem}
+
+@media (max-width:640px){.intersection{height:520px}.road{width:90px;height:120px}.traffic-light{width:48px}
+.bulb{width:28px;height:28px}}
+
+/* Central road surfaces between traffic lights */
+
+.street.vertical{width:120px;left:50%;top:0;transform:translateX(-50%);height:100%}
+.street.horizontal{height:120px;top:50%;left:0;transform:translateY(-50%);width:100%}
+.street.middle{height:150px;top:50%;left:0;}
+.street{position:absolute;background:#111;border-radius:6px;z-index:1;pointer-events:none}
+
+/* center lines on street */
+.street .center-line{position:absolute;left:50%;top:0;transform:translateX(-50%);width:6px;height:100%;background:linear-gradient(#ffd24d 0 40%, transparent 40% 60%, #ffd24d 60% 100%);background-size:6px 28px;opacity:0.9}
+.street.horizontal .center-line{left:0;top:50%;transform:translateY(-50%);width:100%;height:6px;background:linear-gradient(90deg,#ffd24d 0 40%, transparent 40% 60%, #ffd24d 60% 100%);background-size:28px 6px}
+/* black center intersection */
+.street-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:120px;height:120px;background:#111;border-radius:4px;z-index:1;pointer-events:none}
+
+/* zebra / crosswalk styling */
+
+.bottom-crossing{width:120px;height:48px;left:50%;bottom:200px;transform:translateX(-50%);}
+.crosswalk{position:absolute;background:repeating-linear-gradient(90deg,#fff 0 14px, rgba(255,255,255,0) 14px 28px);border-radius:4px;z-index:2;box-shadow:0 4px 8px rgba(0,0,0,0.15);pointer-events:none}
+
+/* ensure traffic lights render above street */
+.road{z-index:3}
+.traffic-light{z-index:4}
+
+@media (max-width:640px){
+  .street.vertical{width:90px}
+  .street.horizontal{height:90px}
+  .bottom-crossing{width:120px;height:40px;bottom:84px}
+}
