@@ -126,6 +126,12 @@
         <p>I am driven by the idea of getting better. Surpassing my own limits and continuously learning new skills to excel in my field.</p>
       </div><!-- End Section Title -->
 
+      <!-- Animated shapes (CSS-only decorative elements) -->
+      <div class="about-shape triangle" aria-hidden="true"></div>
+      <div class="about-shape circle" aria-hidden="true"></div>
+      <div class="about-shape square" aria-hidden="true"></div>
+      <div class="about-shape hexagon" aria-hidden="true"></div>
+
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
         <div class="row gy-5">
@@ -877,31 +883,65 @@
           </div>
 
           <div class="col-lg-8">
-            <form action="forms/contact.php" method="post" class="php-email-form">
-              <div class="row gy-4">
+            <form id="contactForm" class="php-email-form contact-form" novalidate>
+              <div class="row gy-3">
 
                 <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required="">
+                  <label for="firstName" class="form-label">Vardas</label>
+                  <input id="firstName" name="firstName" type="text" class="form-control" placeholder="Vardas" required>
+                  <div class="error-text" data-for="firstName"></div>
                 </div>
 
                 <div class="col-md-6">
-                  <input type="email" class="form-control" name="email" placeholder="Your Email" required="">
+                  <label for="lastName" class="form-label">Pavardė</label>
+                  <input id="lastName" name="lastName" type="text" class="form-control" placeholder="Pavardė" required>
+                  <div class="error-text" data-for="lastName"></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="email" class="form-label">El. paštas</label>
+                  <input id="email" name="email" type="email" class="form-control" placeholder="pvz. vardas@domenas.lt" required>
+                  <div class="error-text" data-for="email"></div>
+                </div>
+
+                <div class="col-md-6">
+                  <label for="phone" class="form-label">Telefono numeris</label>
+                  <input id="phone" name="phone" type="tel" class="form-control" placeholder="+370 6xx xxxxx" inputmode="numeric" required>
+                  <div class="error-text" data-for="phone"></div>
                 </div>
 
                 <div class="col-md-12">
-                  <input type="text" class="form-control" name="subject" placeholder="Subject" required="">
+                  <label for="address" class="form-label">Adresas</label>
+                  <input id="address" name="address" type="text" class="form-control" placeholder="Gatvė, Miestas" required>
+                  <div class="error-text" data-for="address"></div>
                 </div>
 
-                <div class="col-md-12">
-                  <textarea class="form-control" name="message" rows="6" placeholder="Message" required=""></textarea>
+                <div class="col-12">
+                  <fieldset class="rating-group">
+                    <legend>Vertinimo klausimai (1-10)</legend>
+                    <div class="row gy-2">
+                      <div class="col-md-4">
+                        <label for="q1">Klausimas 1: <span class="slider-value" id="q1Val">5</span></label>
+                        <input id="q1" name="q1" type="range" min="1" max="10" value="5" class="form-range">
+                      </div>
+                      <div class="col-md-4">
+                        <label for="q2">Klausimas 2: <span class="slider-value" id="q2Val">5</span></label>
+                        <input id="q2" name="q2" type="range" min="1" max="10" value="5" class="form-range">
+                      </div>
+                      <div class="col-md-4">
+                        <label for="q3">Klausimas 3: <span class="slider-value" id="q3Val">5</span></label>
+                        <input id="q3" name="q3" type="range" min="1" max="10" value="5" class="form-range">
+                      </div>
+                    </div>
+                  </fieldset>
                 </div>
 
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
+                <div class="col-12 text-center">
+                  <button id="submitBtn" class="btn btn-primary" type="submit" disabled>Submit</button>
+                </div>
 
-                  <button type="submit">Send Message</button>
+                <div class="col-12">
+                  <div id="formResults" class="form-results" aria-live="polite"></div>
                 </div>
 
               </div>
@@ -999,6 +1039,7 @@
 
   <!-- Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/custom.js"></script>
 
 </body>
 

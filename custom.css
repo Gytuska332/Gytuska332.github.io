@@ -381,3 +381,158 @@ a:focus { outline: 3px solid rgb(30, 129, 228); outline-offset: 3px; }
 		display: none !important;
 	}
 }
+
+/* =====================
+	 Contact form specific styles
+	 - error states
+	 - results area
+	 - popup message
+	 - sliders
+	 ===================== */
+.contact-form .form-label { font-weight: 600; display: block; margin-bottom: .25rem; color: var(--text); }
+.contact-form .form-control { border: 1px solid rgba(15,23,35,0.08); padding: .6rem .75rem; border-radius: .4rem; background: #fff; color: var(--text); }
+.contact-form .form-control:focus { outline: 3px solid rgba(17,82,147,0.12); box-shadow: none; }
+.contact-form .error-text { color: #b91c1c; font-size: .875rem; margin-top: .25rem; min-height: 1.1rem; }
+.contact-form .form-control.invalid { border-color: #b91c1c; box-shadow: 0 4px 14px rgba(185,28,28,0.06); }
+.contact-form .btn[disabled] { opacity: .55; cursor: not-allowed; }
+
+.form-results { margin-top: 1rem; padding: .9rem; background: linear-gradient(180deg, rgba(17,82,147,0.03), rgba(17,82,147,0.01)); border-radius: .5rem; color: var(--text); border: 1px solid rgba(17,82,147,0.04); }
+.form-results p { margin: .25rem 0; }
+
+.popup-message { position: fixed; right: 20px; bottom: 100px; background: linear-gradient(180deg,var(--success), #059ea0); color: white; padding: .9rem 1rem; border-radius: .6rem; box-shadow: 0 8px 30px rgba(4,46,46,0.2); z-index: 10001; transform: translateY(8px); opacity: 0; pointer-events: none; transition: opacity .26s ease, transform .26s ease; }
+.popup-message.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+
+/* Slider display */
+.form-range { width: 100%; }
+.rating-group legend { font-weight: 700; margin-bottom: .5rem; }
+.slider-value { font-weight: 700; color: var(--primary); margin-left: .4rem; }
+
+/* Small screens form spacing */
+@media (max-width: 576px) {
+  .contact-form .form-control { font-size: .95rem; }
+  .popup-message { right: 12px; left: 12px; bottom: 16px; }
+}
+
+/* =====================
+   Services section: animated gradient background
+   ===================== */
+#services.section {
+	background: linear-gradient(-45deg, #115293, #ff6b35, #0ea5a4, #115293);
+	background-size: 400% 400%;
+	animation: gradientShift 8s ease infinite;
+	position: relative;
+}
+
+@keyframes gradientShift {
+	0% { background-position: 0% 50%; }
+	50% { background-position: 100% 50%; }
+	100% { background-position: 0% 50%; }
+}
+
+/* =====================
+   About section: animated CSS shapes (rotating, scaling, floating)
+   ===================== */
+#about.section {
+	position: relative;
+	overflow: hidden;
+}
+
+/* Animated shape containers - position fixed with z-index behind content */
+.about-shape {
+	position: absolute;
+	pointer-events: none;
+	opacity: 0.08;
+}
+
+/* Triangle (rotates) */
+.about-shape.triangle {
+	width: 120px;
+	height: 120px;
+	top: 5%;
+	left: 8%;
+	animation: rotateCW 8s linear infinite;
+}
+.about-shape.triangle::before {
+	content: '';
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-left: 60px solid transparent;
+	border-right: 60px solid transparent;
+	border-bottom: 104px solid var(--primary);
+}
+
+/* Circle (pulsing) */
+.about-shape.circle {
+	width: 100px;
+	height: 100px;
+	top: 20%;
+	right: 10%;
+	border-radius: 50%;
+	background: var(--accent);
+	animation: pulseBig 3s ease-in-out infinite;
+}
+
+/* Square (floating up-down) */
+.about-shape.square {
+	width: 80px;
+	height: 80px;
+	bottom: 15%;
+	left: 5%;
+	background: var(--success);
+	animation: floatVertical 4s ease-in-out infinite;
+}
+
+/* Hexagon-like (scaling) */
+.about-shape.hexagon {
+	width: 90px;
+	height: 90px;
+	top: 60%;
+	right: 5%;
+	background: linear-gradient(60deg, var(--primary) 25%, transparent 25%) 10px 0,
+	            linear-gradient(120deg, var(--primary) 25%, transparent 25%) 10px 0,
+	            linear-gradient(60deg, var(--primary) 25%, transparent 25%) 0 10px,
+	            linear-gradient(120deg, var(--primary) 25%, transparent 25%) 0 10px,
+	            linear-gradient(60deg, var(--accent) 25%, transparent 25%),
+	            linear-gradient(120deg, var(--accent) 25%, transparent 25%);
+	background-repeat: repeat;
+	background-size: 20px 20px;
+	background-position: 0 0;
+	animation: scaleUp 3.5s ease-in-out infinite;
+}
+
+/* Animations */
+@keyframes rotateCW {
+	0% { transform: rotate(0deg); }
+	100% { transform: rotate(360deg); }
+}
+
+@keyframes pulseBig {
+	0%, 100% { transform: scale(1); }
+	50% { transform: scale(1.3); }
+}
+
+@keyframes floatVertical {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-30px); }
+}
+
+@keyframes scaleUp {
+	0%, 100% { transform: scale(0.8); }
+	50% { transform: scale(1.2); }
+}
+
+/* Ensure shapes don't break layout on small screens */
+@media (max-width: 768px) {
+	.about-shape { opacity: 0.04; }
+	.about-shape.triangle { width: 80px; height: 80px; }
+	.about-shape.circle { width: 70px; height: 70px; }
+	.about-shape.square { width: 60px; height: 60px; }
+	.about-shape.hexagon { width: 70px; height: 70px; }
+}
+
+/* Reduced motion: disable all shape animations */
+@media (prefers-reduced-motion: reduce) {
+	#services.section { animation: none !important; }
+	.about-shape { animation: none !important; }
+}
