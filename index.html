@@ -954,6 +954,47 @@
 
     </section><!-- /Contact Section -->
 
+    <!-- Memory Game Section -->
+    <section id="memory-game" class="memory-game section">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <h2>Mano Žaidimas</h2>
+          <p>Išbandykite atmintį: pasirinkite sudėtingumą ir pradėkite žaidimą.</p>
+        </div>
+
+        <div class="game-controls mb-3 d-flex align-items-center gap-3" data-aos="fade-up">
+          <div class="difficulty">
+            <label><input type="radio" name="difficulty" value="easy" checked> Lengvas (4×3)</label>
+            <label class="ms-3"><input type="radio" name="difficulty" value="hard"> Sunkus (6×4)</label>
+          </div>
+          <div class="ms-auto">
+            <button id="gameStart" class="btn btn-getstarted">Start</button>
+            <button id="gameReset" class="btn btn-secondary">Atnaujinti</button>
+          </div>
+        </div>
+
+        <div class="row gy-4">
+          <div class="col-lg-8">
+            <div id="gameBoardContainer" class="game-board-container" data-aos="fade-up">
+              <div id="gameBoard" class="game-board" aria-live="polite"></div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="game-stats p-3" data-aos="fade-up">
+              <h4>Statistika</h4>
+              <p>Bandymų skaičius: <span id="movesCount">0</span></p>
+              <p>Sutapusių porų: <span id="matchesCount">0</span></p>
+              <p>Laikas: <span id="gameTimer">00:00</span></p>
+              <h5>Geriausi rezultatai</h5>
+              <p>Lengvas: <span id="bestEasy">-</span></p>
+              <p>Sunkus: <span id="bestHard">-</span></p>
+              <div id="winMessage" class="win-message mt-3" aria-live="polite"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
   </main>
 
   <footer id="footer" class="footer">

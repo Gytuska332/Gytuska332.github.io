@@ -274,7 +274,7 @@ a:focus { outline: 3px solid rgb(30, 129, 228); outline-offset: 3px; }
 	width: 150px;
 	height: 50px;
 	position: fixed;
-	left: 19%;
+	left: 18.5%;
 	top: 5%;
 	transform: translate(-50%, -50%);
 	display: flex;
@@ -535,4 +535,31 @@ a:focus { outline: 3px solid rgb(30, 129, 228); outline-offset: 3px; }
 @media (prefers-reduced-motion: reduce) {
 	#services.section { animation: none !important; }
 	.about-shape { animation: none !important; }
+}
+
+/* =====================
+	 Memory Game styles
+	 ===================== */
+.memory-game .game-controls { align-items: center; }
+.game-board-container { background: rgba(255,255,255,0.03); padding: 1rem; border-radius: .5rem; }
+.game-board { display: grid; gap: 12px; justify-content: center; align-content: start; }
+.game-board.easy { grid-template-columns: repeat(4, minmax(80px, 1fr)); }
+.game-board.hard { grid-template-columns: repeat(6, minmax(64px, 1fr)); }
+.game-card { perspective: 900px; }
+.card-inner { position: relative; width: 100%; padding-top: 100%; /* square */ transform-style: preserve-3d; transition: transform .45s cubic-bezier(.2,.9,.25,1); }
+.card-inner.flipped { transform: rotateY(180deg); }
+.card-face { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; border-radius: .5rem; backface-visibility: hidden; font-size: 1.6rem; }
+.card-front { background: linear-gradient(180deg,#ffffff,#f1f5f9); color: #0b3b5a; border: 1px solid rgba(15,23,35,0.06); }
+.card-back { background: var(--primary); color: white; transform: rotateY(180deg); }
+.card-disabled { opacity: .5; pointer-events: none; }
+.game-stats { background: rgba(255,255,255,0.02); border-radius: .5rem; }
+.win-message { font-weight: 700; color: var(--success); }
+
+@media (max-width: 768px) {
+	.game-board.easy { grid-template-columns: repeat(3, minmax(80px, 1fr)); }
+	.game-board.hard { grid-template-columns: repeat(4, minmax(64px, 1fr)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.card-inner { transition: none !important; }
 }
